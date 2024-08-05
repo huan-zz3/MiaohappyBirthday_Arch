@@ -9,13 +9,18 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    applicationcore.cpp \
     main.cpp
 
-HEADERS +=
+HEADERS += \
+    applicationcore.h
 
 FORMS +=
 
 RESOURCES += src.qrc
+
+include(./interfaces/interfaces.pri)
+INCLUDEPATH += $$PWD/interfaces
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
