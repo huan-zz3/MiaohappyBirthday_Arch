@@ -12,6 +12,8 @@ public:
     virtual QString getNowTime() = 0;
     virtual QString getTodayDate() = 0;
     virtual QString getTodayWeek() = 0;
+    virtual QString getTomorrowWeek() = 0;
+    virtual QString getThirdayWeek() = 0;
     
     
 signals:

@@ -1,10 +1,12 @@
 HEADERS += \
-    $$PWD/ihomegui.h \
-    $$PWD/ihumanexist.h \
-    $$PWD/ilocation.h \
-    $$PWD/itimedate.h \
-    $$PWD/iweatherinfo.h \
-    $$PWD/iwificontrol.h \
-    $$PWD/iwifigui.h
+    $$PWD/grapview_centre.h \
+    $$PWD/grapview_home.h \
+    $$PWD/ui_home.h
 
-SOURCES +=
+SOURCES += \
+    $$PWD/grapview_centre.cpp \
+    $$PWD/grapview_home.cpp \
+    $$PWD/ui_home.cpp
+
+FORMS += \
+    $$PWD/ui_home.ui

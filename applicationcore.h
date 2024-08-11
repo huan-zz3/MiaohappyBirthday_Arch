@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QTimer>
 
 #include "ihomegui.h"
 #include "ihumanexist.h"
@@ -16,6 +17,7 @@ class ApplicationCore : public QObject
     Q_OBJECT
 public:
     explicit ApplicationCore(QObject *parent = nullptr);
+    void finishInitObject();
     
     void setHumanExistobject(IHumanExist*);
     void setWeatherinfoobject(IWeatherinfo*);
@@ -25,6 +27,7 @@ public:
     void setHomeGUI(IHomeGUI*);
     
     void testLocation();
+    void testTimeDate();
     
     
 private:
@@ -35,8 +38,15 @@ private:
     IHomeGUI *home_;
     IWIFIGUI *wifigui_;
     
+    QTimer *timer_time, *timer_weatherinfo, *timer_location;
     
     
+    void initTimerinUpdatetime();
+    
+private slots:
+    void slot_UpdateTime();
+    void slot_UpdateWeatherInfo();
+    void slot_UpdateLocation();
     
 signals:
     

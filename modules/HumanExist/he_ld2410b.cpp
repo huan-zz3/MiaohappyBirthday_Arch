@@ -15,7 +15,7 @@ HE_LD2410B::HE_LD2410B(QObject *parent):IHumanExist(parent)
 }
 
 /**************************************/
-ExistenceofHumanBody::ExistenceofHumanBody(int _line, IHumanExist *parent) : QObject(parent), IHparent_(parent), line(_line)
+ExistenceofHumanBody::ExistenceofHumanBody(int _line, IHumanExist *parent) : QObject(nullptr), IHparent_(parent), line(_line)
 {}
 void ExistenceofHumanBody::slot_onThreadStarted(){
     gpioInit(line);

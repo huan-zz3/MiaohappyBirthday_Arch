@@ -251,7 +251,7 @@ QWeather::QWeather(QObject *parent) : IWeatherinfo(parent)
     InitQWeatherAPIService();
 }
 void QWeather::InitQWeatherAPIService(){
-    qWA = new QweatherAPIService(this);
+    qWA = new QweatherAPIService(nullptr);
     QThread *serviceThread = new QThread();
     qWA->moveToThread(serviceThread);
     
@@ -262,32 +262,33 @@ void QWeather::InitQWeatherAPIService(){
     serviceThread->start();
 }
 QString QWeather::getTodayIcon(){
-    return dayInformation[Today].iconDay;
+    return QString(":/weathericons/src/weathericons/%1.svg").arg(dayInformation[Today].iconDay);
 }
 QString QWeather::getTomorrowIcon(){
-    return dayInformation[Tomorrow].iconDay;
+    return QString(":/weathericons/src/weathericons/%1.svg").arg(dayInformation[Tomorrow].iconDay);
 }
 QString QWeather::getThirdayIcon(){
-    return dayInformation[ThirdDay].iconDay;
+    return QString(":/weathericons/src/weathericons/%1.svg").arg(dayInformation[ThirdDay].iconDay);
 }
 QString QWeather::getNowTemp(){
-    return temperaturenow;
+    return QString("%1℃").arg(temperaturenow);
 }
 QString QWeather::getTodayMaxTemp(){
+    return QString("%1℃").arg(temperaturenow);
     return dayInformation[Today].tempMax;
 }
 QString QWeather::getTodayMinTemp(){
-    return dayInformation[Today].tempMin;
+    return QString("%1℃").arg(dayInformation[Today].tempMin);
 }
 QString QWeather::getTomorrowMaxTemp(){
-    return dayInformation[Tomorrow].tempMax;
+    return QString("%1℃").arg(dayInformation[Tomorrow].tempMax);
 }
 QString QWeather::getTomorrowMinTemp(){
-    return dayInformation[Tomorrow].tempMin;
+    return QString("%1℃").arg(dayInformation[Tomorrow].tempMin);
 }
 QString QWeather::getThirdayMaxTemp(){
-    return dayInformation[ThirdDay].tempMax;
+    return QString("%1℃").arg(dayInformation[ThirdDay].tempMax);
 }
 QString QWeather::getThirdayMinTemp(){
-    return dayInformation[ThirdDay].tempMin;
+    return QString("%1℃").arg(dayInformation[ThirdDay].tempMin);
 }

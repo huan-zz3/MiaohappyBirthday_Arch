@@ -18,6 +18,7 @@
 class ExistenceofHumanBody;
 class HE_LD2410B : public IHumanExist
 {
+    Q_OBJECT
 public:
     HE_LD2410B(QObject *parent = nullptr);
     
