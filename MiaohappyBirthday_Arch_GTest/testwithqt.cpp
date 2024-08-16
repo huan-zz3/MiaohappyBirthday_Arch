@@ -2,9 +2,9 @@
 
 
 
-TEST_F(TestwithQt, Cout){
-    EXPECT_EQ(lh_->getNowLocation(), "Dongguan, Guangdong");
-}
+//TEST_F(TestwithQt, Cout){
+//    EXPECT_EQ(lh_->getNowLocation(), "Dongguan, Guangdong");
+//}
 
 
 

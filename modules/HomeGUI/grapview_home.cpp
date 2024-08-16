@@ -9,7 +9,7 @@ GrapView_home::GrapView_home(QGraphicsScene *scene, QWidget *parent)
         timer->stop();
         slideValid = true;
     });
-    this->setCursor(Qt::BlankCursor);
+//    this->setCursor(Qt::BlankCursor);
 }
 void GrapView_home::mouseMoveEvent(QMouseEvent *event){
     if(event->buttons() & Qt::LeftButton) { 
@@ -35,6 +35,11 @@ void GrapView_home::mouseMoveEvent(QMouseEvent *event){
 void GrapView_home::mousePressEvent(QMouseEvent *event){
     if (event->button() == Qt::LeftButton) {
         lastMousePos = event->pos(); // 记录鼠标按下时的位置
+//        if (QGraphicsItem *item = itemAt(event->pos())) {
+//            qDebug() << "You clicked on item" << item;
+//        } else {
+//            qDebug("You didn't click on an item.");
+//        }
     }
     QGraphicsView::mousePressEvent(event);
 }

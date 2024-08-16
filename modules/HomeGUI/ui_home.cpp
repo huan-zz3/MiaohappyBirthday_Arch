@@ -8,7 +8,8 @@ UI_Home::UI_Home(QWidget *parent) :
     ui->setupUi(this);
     initView();
     initsubScene();
-    this->setCursor(Qt::BlankCursor);
+    initconnect();
+//    this->setCursor(Qt::BlankCursor);
 //    showFullScreen();
 }
 
@@ -41,6 +42,15 @@ void UI_Home::initView(){
     proxyWidget = mainScene->addWidget(subView);
     proxyWidget->setPos(185, 146);
     
+}
+void UI_Home::initconnect(){
+//    connect(pixmenu, &QPixmap::click)
+    qDebug()<<"pixmenu: "<<pixmenu;
+    connect(subView, &GrapView_centre::signal_MousePress, this, [this](QGraphicsItem *pressItem){
+        if(this->pixmenu == pressItem){
+            emit this->signal_MenuPress();
+        }
+    });
 }
 void UI_Home::initsubScene(){
     // mask

@@ -85,6 +85,10 @@ private:
     void initView();
     QString loadFont(QString);
     void initsubScene();
+    void initconnect();
+    
+signals:
+//    void signal_MenuPress();
 };
 
 #endif // UI_HOME_H

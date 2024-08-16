@@ -12,7 +12,7 @@ public:
     explicit IWIFIControl(QObject *parent = nullptr):QObject(parent){};
     virtual QList<QMap<QString,QString>> getWIFIlist() = 0;
     virtual bool isConnected() = 0;
-    virtual bool connectWIFI(QString _name) = 0;
+    virtual bool connectWIFI(QString _name, QString _password) = 0;
     virtual bool disconnectWIFI() = 0;
     
     

@@ -11,6 +11,7 @@
 #include "itimedate.h"
 #include "iweatherinfo.h"
 #include "iwifigui.h"
+#include "iwificontrol.h"
 
 class ApplicationCore : public QObject
 {
@@ -23,11 +24,12 @@ public:
     void setWeatherinfoobject(IWeatherinfo*);
     void setTimeDateobject(ITimeDate*);
     void setLocationobject(ILocation*);
-    void setWIFIGUIobject(IWIFIGUI*);
+    void setWIFIGUIobject(IWIFIGUI*, IWIFIControl*);
     void setHomeGUI(IHomeGUI*);
     
     void testLocation();
     void testTimeDate();
+    void testWIFIpannel();
     
     
 private:
@@ -47,6 +49,7 @@ private slots:
     void slot_UpdateTime();
     void slot_UpdateWeatherInfo();
     void slot_UpdateLocation();
+    void slot_MenuPress();
     
 signals:
     

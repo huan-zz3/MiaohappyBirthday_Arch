@@ -30,7 +30,7 @@ public:
     
     
 signals:
-    
+    void signal_MenuPress();
 };
 
 #endif // IHOMEGUI_H

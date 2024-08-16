@@ -1,6 +1,7 @@
 #ifndef GRAPVIEW_HOME_H
 #define GRAPVIEW_HOME_H
 
+#include <QObject>
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimer>
@@ -12,6 +13,7 @@
 
 class GrapView_home : public QGraphicsView
 {
+    Q_OBJECT
 public:
     explicit GrapView_home(QGraphicsScene *, QWidget *parent = nullptr);
     

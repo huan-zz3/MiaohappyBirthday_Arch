@@ -9,6 +9,8 @@ void ApplicationCore::finishInitObject(){
     timer_weatherinfo->start(1000);
     timer_location->start(1000*60*3);
     
+    connect(home_, &IHomeGUI::signal_MenuPress, this, &ApplicationCore::slot_MenuPress);
+    
     home_->setNowLocation(lc_->getNowLocation());// first exec
     home_->showHomeForm();
 }
@@ -25,8 +27,9 @@ void ApplicationCore::setTimeDateobject(ITimeDate* _it){
 void ApplicationCore::setLocationobject(ILocation* _il){
     lc_ = _il;
 }
-void ApplicationCore::setWIFIGUIobject(IWIFIGUI* _iw){
+void ApplicationCore::setWIFIGUIobject(IWIFIGUI* _iw, IWIFIControl* _iwc){
     wifigui_ = _iw;
+    wifigui_->setWIFIControl(_iwc);
 }
 void ApplicationCore::setHomeGUI(IHomeGUI* _ih){
     home_ = _ih;
@@ -78,4 +81,10 @@ void ApplicationCore::slot_UpdateWeatherInfo(){
 }
 void ApplicationCore::slot_UpdateLocation(){
     home_->setNowLocation(lc_->getNowLocation());
+}
+void ApplicationCore::testWIFIpannel(){
+    wifigui_->addWIFIItem();
+}
+void ApplicationCore::slot_MenuPress(){
+    wifigui_->showWIFIPanel();
 }

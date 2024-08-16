@@ -4,7 +4,7 @@ GrapView_centre::GrapView_centre(QGraphicsScene *scene,  QWidget *parent)
     : QGraphicsView(scene, parent)
 {
     setBackground();
-    this->setCursor(Qt::BlankCursor);
+//    this->setCursor(Qt::BlankCursor);
 //    resize(354, 242);
 }
 void GrapView_centre::setBackground(){
@@ -23,4 +23,15 @@ void GrapView_centre::setBackground(){
     
     // 为了使背景完全不透明并显示为白色（同时保持视图内容可能的透明效果），确保场景本身没有设置透明度，
     // 或者如果你想要场景中的内容也有透明效果，则调整场景中的项来匹配所需的不透明度。
+}
+void GrapView_centre::mousePressEvent(QMouseEvent *event){
+    if (event->button() == Qt::LeftButton) {
+        if (QGraphicsItem *item = itemAt(event->pos())) {
+            qDebug() << "You clicked on item" << item;
+            emit signal_MousePress(item);
+        } else {
+            qDebug("You didn't click on an item.");
+        }
+    }
+    QGraphicsView::mousePressEvent(event);
 }
