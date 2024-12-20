@@ -179,19 +179,18 @@ bool WIFIwpa_package::connectWIFI(QString _name, QString _password){
         return false;  // 返回错误码
     }
     
-    // 保存网络
-    char au8SaveBuf[64] = {"\0"};  // 保存网络命令缓冲区
-    snprintf(au8SaveBuf, sizeof(au8SaveBuf) - 1, "SAVE_CONFIG");  // 构造保存网络命令
+    // 选择网络
+    char au8SelectBuf[64] = {"\0"};  // 启用网络命令缓冲区
+    snprintf(au8SelectBuf, sizeof(au8SelectBuf) - 1, "SELECT_NETWORK %d", s32NetId);  // 构造启用网络命令
     memset(au8ReplyBuf, '\0', sizeof(au8ReplyBuf));  // 清空回复缓冲区
     reply_len = sizeof(au8ReplyBuf) - 1;             // 设置回复缓冲区最大长度
-    ret = wpa_ctrl_request(ctrl, au8SaveBuf, strlen(au8SaveBuf), au8ReplyBuf, &reply_len, NULL);  // 发送请求
+    ret = wpa_ctrl_request(ctrl, au8SelectBuf, strlen(au8SelectBuf), au8ReplyBuf, &reply_len, NULL);  // 发送请求
     if (ret == 0) {  // 如果请求成功
         au8ReplyBuf[reply_len] = '\0';  // 确保字符串以'\0'结尾
-        printf("\x1b[32m""%s %d, reply_len:%d, au8SaveBuf:%s\n""\x1b[0m", __FILE__, __LINE__, reply_len, au8ReplyBuf);  // 输出成功信息
+        printf("\x1b[32m""%s %d, reply_len:%d, au8ReplyBuf:%s\n""\x1b[0m", __FILE__, __LINE__, reply_len, au8ReplyBuf);  // 输出成功信息
     } else {  // 如果请求失败
         return false;  // 返回错误码
     }
-    
     
     if(!runDhclient()){
         qDebug()<<"runDhclient ERR!";

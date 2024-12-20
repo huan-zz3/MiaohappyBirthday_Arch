@@ -10,7 +10,7 @@ class IWIFIGUI : public QWidget
     Q_OBJECT
 public:
     explicit IWIFIGUI(QWidget *parent = nullptr):QWidget(parent){};
-    
+    virtual void setDefaultWIFI() = 0;
     virtual void setWIFIControl(IWIFIControl *) = 0;
     virtual void showWIFIPanel() = 0;
     virtual void closeWIFIPanel() = 0;

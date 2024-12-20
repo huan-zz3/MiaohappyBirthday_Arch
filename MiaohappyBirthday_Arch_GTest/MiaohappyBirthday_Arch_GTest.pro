@@ -10,11 +10,13 @@ QT += core gui network svg widgets
 
 SOURCES += \
         main.cpp         tst_casename.cpp \
+        testwallpaper.cpp \
         testwifi.cpp \
         testwithqt.cpp
 
 HEADERS += \
     mygtest.h \
+    testwallpaper.h \
     testwifi.h \
     testwithqt.h
     

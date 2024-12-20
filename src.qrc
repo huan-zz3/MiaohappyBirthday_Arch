@@ -9,6 +9,7 @@
         <file>src/png/gradientback.png</file>
         <file>src/png/menu.png</file>
         <file>src/png/bless.png</file>
+        <file>src/png/restart.png</file>
     </qresource>
     <qresource prefix="/weathericons">
         <file>src/weathericons/100.svg</file>

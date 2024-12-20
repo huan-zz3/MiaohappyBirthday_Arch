@@ -13,6 +13,8 @@
 #include <QFont>
 #include <QFontDatabase>
 #include <QPushButton>
+#include <QSettings>
+#include <QVariant>
 
 namespace Ui {
 class WIFIPannel;
@@ -26,6 +28,7 @@ public:
     explicit WIFIPannel(QWidget *parent = nullptr);
     ~WIFIPannel();
     
+    void setDefaultWIFI() override;
     void setWIFIControl(IWIFIControl *) override;
     void showWIFIPanel() override;
     void closeWIFIPanel() override;
@@ -41,7 +44,10 @@ private:
     
     void initTable();
     void initButton();
+    void initdefaultWIFI();
     QString loadFont(QString fontpath);
+    void saveData(const QString &key, const QVariant &value);
+    QVariant loadData(const QString &key, const QVariant &defaultValue);
     
 private slots:
     void slot_connectThiswifi(QTableWidgetItem *);

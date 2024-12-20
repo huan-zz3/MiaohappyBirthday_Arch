@@ -31,6 +31,7 @@ public:
     
 signals:
     void signal_MenuPress();
+    void signal_RestartPress();
 };
 
 #endif // IHOMEGUI_H

@@ -17,21 +17,25 @@ WIFIPannel::~WIFIPannel()
 {
     delete ui;
 }
+void WIFIPannel::setDefaultWIFI(){
+    initdefaultWIFI();
+}
 void WIFIPannel::setWIFIControl(IWIFIControl *_wfc){
     wfc = _wfc;
 }
 void WIFIPannel::showWIFIPanel(){
     showFullScreen();
+    this->addWIFIItem();
 }
 void WIFIPannel::closeWIFIPanel(){
     hide();
 }
 void WIFIPannel::initTable(){
-    //在 widget 窗口中添加一个 4 行 3 列的表格
-    tablewidget = new QTableWidget(40,2,this);
+    //在 widget 窗口中添加一个 50 行 2 列的表格
+    tablewidget = new QTableWidget(50,2,this);
     //自定义表格的尺寸和字体大小
 //    tablewidget->resize(900,350);
-    QString itemFont = loadFont(":/font/src/font/321impact.ttf");
+    QString itemFont = loadFont(":/font/src/font/Rainbow-Party.ttf");
     const int fontsize = 15;
     tablewidget->setGeometry(200,100,624,400);
     tablewidget->setFont(QFont(itemFont, fontsize));
@@ -52,53 +56,38 @@ void WIFIPannel::initTable(){
     tablewidget->verticalHeader()->setVisible(false);
     // 单元格双击连接该wifi
     connect(tablewidget, &QTableWidget::itemDoubleClicked, this, &WIFIPannel::slot_connectThiswifi);
-//    connect(tablewidget, &QTableWidget::itemDoubleClicked, this, [this]() {
-        
-//    });
     
 }
 void WIFIPannel::addWIFIItem()
 {
     // 清空之前的测试项（如果有的话）
     auto wifiDataList = wfc->getWIFIlist();
-//    listwidget->clear();
     
-    QString itemFont = loadFont(":/font/src/font/Bock-Medium.ttf");
-    const int fontsize = 20;
-    
+    tablewidget->setRowCount(wifiDataList.size());
     for(int i = 0; i < wifiDataList.size(); ++i) {
         const QMap<QString, QString>& wifiInfo = wifiDataList.at(i);
         
         // 从QMap中提取SSID和SignalLevel
         QString ssid = wifiInfo.value("ssid");
+        if(ssid==""){
+            ssid = "<hiddenSSID>";
+        }
         QString signalLevel = wifiInfo.value("signal level");
         
+        // 删除旧的列表项(Qt会自行管理，也没有手动删除的函数）
         // 创建新的列表项并设置文本
         QTableWidgetItem *_item_ssid = new QTableWidgetItem(ssid);
         QTableWidgetItem *_item_signallevel = new QTableWidgetItem(signalLevel);
-//        QListWidgetItem *item_singlewifi = new QListWidgetItem(ssid + " ---- " + signalLevel);
-//        QListWidgetItem *item_ssid = new QListWidgetItem(ssid);
-//        QListWidgetItem *item_signalLevel = new QListWidgetItem(signalLevel);
         
         // 设置样式
-//        item_singlewifi->setTextAlignment(Qt::AlignCenter);
         _item_ssid->setTextAlignment(Qt::AlignCenter);
         _item_signallevel->setTextAlignment(Qt::AlignCenter);
-//        item_singlewifi->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-//        item_singlewifi->setFont(QFont(itemFont, fontsize));
         
-//        item_signalLevel->setTextAlignment(Qt::AlignCenter);
-//        item_signalLevel->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-//        item_signalLevel->setFont(QFont(itemFont, fontsize));
         
         // 添加到列表中
         tablewidget->setItem(i,0,_item_ssid);
         tablewidget->setItem(i,1,_item_signallevel);
-//        listwidget->addItem(item_singlewifi);
-        // 同样的，关于如何处理SignalLevel，请根据实际需求调整
-//        listwidget->addItem(item_signalLevel); 
         
-        // 如果需要在同一行显示SSID和SignalLevel，请考虑使用自定义项或调整UI设计
     }
 }
 QString WIFIPannel::loadFont(QString fontpath){
@@ -127,9 +116,11 @@ void WIFIPannel::slot_connectThiswifi(QTableWidgetItem *clickeditem){
             ssid = tablewidget->item(tablewidget->column(clickeditem), 0)->text();
         }
         qDebug() << ssid + "+" + password;
-        
+        // 正式开始连接wifi
         if(wfc->connectWIFI(ssid,password)){
             qDebug()<<"wifi connect success!";
+            saveData("ssid", ssid);// 保存帐密
+            saveData("password", password);
         }
         
     } else { // 用户点击了取消
@@ -144,4 +135,22 @@ void WIFIPannel::initButton(){
         this->closeWIFIPanel();
     });
     
+}
+void WIFIPannel::initdefaultWIFI(){
+    QString ssid = loadData("ssid", "Huanzze").toString();
+    QString password = loadData("password", "whl369258147").toString();
+    if(wfc->connectWIFI(ssid,password)){
+        qDebug()<<"initdefaultWIFI success!";
+    }else{
+        qDebug()<<"initdefaultWIFI failed!";
+    }
+}
+void WIFIPannel::saveData(const QString &key, const QVariant &value){
+    QSettings settings; // 默认构造函数会使用应用程序的组织和域名作为设置的名称
+    settings.setValue(key, value);
+}
+QVariant WIFIPannel::loadData(const QString &key, const QVariant &defaultValue)
+{
+    QSettings settings;
+    return settings.value(key, defaultValue);
 }

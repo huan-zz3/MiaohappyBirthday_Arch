@@ -81,6 +81,7 @@ private:
     QString timeString, dateString, locationString, temperaturenowString, weekString[3], temperaturescaleString[3][2];
     QSvgRenderer *weathericonrenderer[3];
     
+    QGraphicsPixmapItem *restart;
     
     void initView();
     QString loadFont(QString);

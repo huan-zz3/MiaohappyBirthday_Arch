@@ -28,6 +28,13 @@ void UI_Home::initView(){
     QBrush backgroundBrush(bgPixmap);
     mainView->setBackgroundBrush(backgroundBrush);// 设置背景图
     
+    // restart picture
+    restart = new QGraphicsPixmapItem();
+    restart->setPixmap(QPixmap(":/src/src/png/restart.png"));
+    restart->setPos(970,10);
+    restart->setScale(0.2);
+    mainScene->addItem(restart);
+    
     subScene = new QGraphicsScene(QRect(0,0,666,306), this);
     QColor transparentColor(255,255,255,180);
     QBrush transparentBrush(transparentColor);
@@ -49,6 +56,11 @@ void UI_Home::initconnect(){
     connect(subView, &GrapView_centre::signal_MousePress, this, [this](QGraphicsItem *pressItem){
         if(this->pixmenu == pressItem){
             emit this->signal_MenuPress();
+        }
+    });
+    connect(mainView, &GrapView_home::signal_RestartPress, this, [this](QGraphicsItem *pressItem){
+        if(this->restart == pressItem){
+            emit this->signal_RestartPress();
         }
     });
 }
@@ -210,6 +222,9 @@ void UI_Home::initsubScene(){
     temperaturescaleString[2][1] = "18℃";
     temperaturescale[2][1]->setPlainText(temperaturescaleString[2][1]);
     subScene->addItem(temperaturescale[2][1]);
+    
+    
+    
 }
 QString UI_Home::loadFont(QString fontpath){
     int fontId = QFontDatabase::addApplicationFont(fontpath);
@@ -228,6 +243,8 @@ QString UI_Home::loadFont(QString fontpath){
 
 void UI_Home::showHomeForm()  {
     this->showFullScreen();
+    this->raise();
+    this->activateWindow();
 }
 void UI_Home::closeHomeForm()  {
     this->hide();

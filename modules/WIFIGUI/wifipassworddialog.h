@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
+
 namespace Ui {
 class WifiPasswordDialog;
 }
@@ -27,6 +28,7 @@ private slots:
 private:
     Ui::WifiPasswordDialog *ui;
     QLineEdit *passwordEdit;
+    
 //    QPushButton *okButton;
 //    QPushButton *cancelButton;
 };

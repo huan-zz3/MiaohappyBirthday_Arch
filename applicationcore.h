@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QDebug>
 #include <QTimer>
+#include <QEventLoop>
+#include <QProcess>
 
 #include "ihomegui.h"
 #include "ihumanexist.h"
@@ -12,6 +14,7 @@
 #include "iweatherinfo.h"
 #include "iwifigui.h"
 #include "iwificontrol.h"
+#include "IWallpaper.h"
 
 class ApplicationCore : public QObject
 {
@@ -26,10 +29,12 @@ public:
     void setLocationobject(ILocation*);
     void setWIFIGUIobject(IWIFIGUI*, IWIFIControl*);
     void setHomeGUI(IHomeGUI*);
+    void setWallpaperGUI(IWallpaper*);
     
     void testLocation();
     void testTimeDate();
     void testWIFIpannel();
+    void testWallpaper();
     
     
 private:
@@ -39,17 +44,22 @@ private:
     ILocation *lc_;
     IHomeGUI *home_;
     IWIFIGUI *wifigui_;
+    IWallpaper *wallpaper_;
     
     QTimer *timer_time, *timer_weatherinfo, *timer_location;
     
     
     void initTimerinUpdatetime();
+    void virtualKeyBoard();
     
 private slots:
     void slot_UpdateTime();
     void slot_UpdateWeatherInfo();
     void slot_UpdateLocation();
     void slot_MenuPress();
+    void slot_RestartPress();
+    void slot_HumanExist();
+    void slot_HumanNotExist();
     
 signals:
     

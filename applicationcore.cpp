@@ -3,6 +3,7 @@
 ApplicationCore::ApplicationCore(QObject *parent) : QObject(parent)
 {
     initTimerinUpdatetime();
+    virtualKeyBoard();
 }
 void ApplicationCore::finishInitObject(){
     timer_time->start(500);
@@ -10,6 +11,9 @@ void ApplicationCore::finishInitObject(){
     timer_location->start(1000*60*3);
     
     connect(home_, &IHomeGUI::signal_MenuPress, this, &ApplicationCore::slot_MenuPress);
+    connect(home_, &IHomeGUI::signal_RestartPress, this, &ApplicationCore::slot_RestartPress);
+    connect(humanexist_, &IHumanExist::signal_HumanExist, this, &ApplicationCore::slot_HumanExist, Qt::QueuedConnection);
+    connect(humanexist_, &IHumanExist::signal_HumanNotExist, this, &ApplicationCore::slot_HumanNotExist, Qt::QueuedConnection);
     
     home_->setNowLocation(lc_->getNowLocation());// first exec
     home_->showHomeForm();
@@ -30,9 +34,13 @@ void ApplicationCore::setLocationobject(ILocation* _il){
 void ApplicationCore::setWIFIGUIobject(IWIFIGUI* _iw, IWIFIControl* _iwc){
     wifigui_ = _iw;
     wifigui_->setWIFIControl(_iwc);
+    wifigui_->setDefaultWIFI();
 }
 void ApplicationCore::setHomeGUI(IHomeGUI* _ih){
     home_ = _ih;
+}
+void ApplicationCore::setWallpaperGUI(IWallpaper* _wp){
+    wallpaper_ = _wp;
 }
 void ApplicationCore::testLocation(){
     qDebug()<<lc_->getNowLocation();
@@ -55,6 +63,9 @@ void ApplicationCore::initTimerinUpdatetime(){
     timer_location = new QTimer(this);
     connect(timer_location, &QTimer::timeout, this, &ApplicationCore::slot_UpdateLocation);
     
+}
+void ApplicationCore::virtualKeyBoard(){
+    system("onboard &");
 }
 void ApplicationCore::slot_UpdateTime(){
     qDebug()<<"<slot_UpdateTime>";
@@ -87,4 +98,25 @@ void ApplicationCore::testWIFIpannel(){
 }
 void ApplicationCore::slot_MenuPress(){
     wifigui_->showWIFIPanel();
+}
+void ApplicationCore::slot_RestartPress(){
+    system("reboot");
+}
+void ApplicationCore::testWallpaper(){
+    wallpaper_->showWallpaperForm();
+//    wallpaper_->nextPicture();
+//    QEventLoop loop;
+//    QTimer timer;
+//    QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+//    timer.start(3000);
+//    loop.exec();
+//    wallpaper_->nextPicture();
+}
+void ApplicationCore::slot_HumanExist(){
+    home_->showHomeForm();
+    wallpaper_->closeWallpaperForm();
+}
+void ApplicationCore::slot_HumanNotExist(){
+    wallpaper_->showWallpaperForm();
+    home_->closeHomeForm();
 }

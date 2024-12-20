@@ -1,4 +1,5 @@
 HEADERS += \
+    $$PWD/IWallpaper.h \
     $$PWD/ihomegui.h \
     $$PWD/ihumanexist.h \
     $$PWD/ilocation.h \

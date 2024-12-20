@@ -15,3 +15,5 @@ include(./Weatherinfo/Weatherinfo.pri)
 INCLUDEPATH += $$PWD/Weatherinfo
 include(./WIFIGUI/WIFIGUI.pri)
 INCLUDEPATH += $$PWD/WIFIGUI
+include(./WallpaperGUI/WallpaperGUI.pri)
+INCLUDEPATH += $$PWD/WallpaperGUI

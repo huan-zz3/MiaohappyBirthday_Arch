@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 5.0.2, 2024-08-12T16:20:50. -->
+<!-- Written by QtCreator 5.0.2, 2024-08-17T18:05:05. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -68,8 +68,9 @@
     <value type="bool" key="AutoTest.Framework.QtTest">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="AutoTest.CheckStates">
-    <value type="Qt::CheckState" key="1@/home/huanzze/Qtprj/MiaohappyBirthday_Arch/MiaohappyBirthday_Arch_GTest/testwifi.cpp:Cout">Checked</value>
     <value type="Qt::CheckState" key="1@/home/huanzze/Qtprj/MiaohappyBirthday_Arch/MiaohappyBirthday_Arch_GTest/testwifi.cpp:TestWIFI">Checked</value>
+    <value type="Qt::CheckState" key="1@/home/huanzze/Qtprj/MiaohappyBirthday_Arch/MiaohappyBirthday_Arch_GTest/testwifi.cpp:connectWIFI">Checked</value>
+    <value type="Qt::CheckState" key="1@/home/huanzze/Qtprj/MiaohappyBirthday_Arch/MiaohappyBirthday_Arch_GTest/testwifi.cpp:showWIFIPanel">Checked</value>
     <value type="Qt::CheckState" key="1@/home/huanzze/Qtprj/MiaohappyBirthday_Arch/MiaohappyBirthday_Arch_GTest/tst_casename.cpp:casename">Checked</value>
     <value type="Qt::CheckState" key="1@/home/huanzze/Qtprj/MiaohappyBirthday_Arch/MiaohappyBirthday_Arch_GTest/tst_casename.cpp:suitename">Checked</value>
    </valuemap>

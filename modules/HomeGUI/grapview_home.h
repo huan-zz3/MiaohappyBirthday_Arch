@@ -28,6 +28,7 @@ private:
 signals:
     void signal_slideToTop();
     void signal_slideToBottom();
+    void signal_RestartPress(QGraphicsItem *);
 };
 
 #endif // GRAPVIEW_HOME_H
